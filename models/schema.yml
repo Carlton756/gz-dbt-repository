@@ -6,7 +6,7 @@ sources:
     tables:
       - name: raw_gz_product
         description: table containing product id ssociated with purchase price of products
-      -  name: raw_gz_sales
-         description: table of order id and associated product id along with revenue generated and quantity of products
-      -  name: raw_gz_ship
-         description: table containing order id and associated shipping fees, logistics cost, shipping costs 
+      - name: raw_gz_sales
+        description: table of order id and associated product id along with revenue generated and quantity of products
+      - name: raw_gz_ship
+        description: table containing order id and associated shipping fees, logistics cost, shipping costs
