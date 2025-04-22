@@ -30,6 +30,9 @@ sources:
             description: order identifier
           - name: pdt_id
             description: product identifier
+            tests:
+                - unique:
+                    column_name: "(orders_id || `-` || pdt_id)"
           - name: revenue
             description: revenue generated from each order made of a product
           - name: quantity
