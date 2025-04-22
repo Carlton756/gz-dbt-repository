@@ -11,6 +11,7 @@ sources:
             description: product identifier
             tests:
               - unique
+              - not null
           - name: purchSE_PRICE
             description: product purchase price
         
@@ -33,6 +34,7 @@ sources:
             tests:
                 - unique:
                     column_name: "(orders_id || '_' || pdt_id)"
+                - not_null
           - name: revenue
             description: revenue generated from each order made of a product
           - name: quantity
@@ -44,6 +46,7 @@ sources:
             description: order identifier
             tests:
               - unique
+              - not_null
           - name: shipping_fee
             description: shipping fee per order
           - name: shipping_fee_1
