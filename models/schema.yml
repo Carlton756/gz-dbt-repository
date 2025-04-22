@@ -5,8 +5,42 @@ sources:
     description: dataset containing raw data sources
     tables:
       - name: raw_gz_product
-        description: table containing product id ssociated with purchase price of products
+        description: table containing product id ssociated with purchase price of each product
+        columns:
+          - name: products_id
+            description: product identifier
+            tests:
+              - unique
+          - name: purchSE_PRICE
+            description: product purchase price
+        
       - name: raw_gz_sales
-        description: table of order id and associated product id along with revenue generated and quantity of products
+        description: table of order id and associated product id along with revenue generated and quantity of products sold
+        columns:
+          - name: date_date
+            description: date of purchase
+          - name: order_id
+            description: order identifier
+          - name: pdt_id
+            description: product identifier
+          - name: revenue
+            description: revenue generated from each order made of a product
+          - name: quantity
+            description: number of products sold
       - name: raw_gz_ship
-        description: table containing order id and associated shipping fees, logistics cost, shipping costs
+        description: table containing order id and associated shipping fees, logistics cost, shipping costs for each order
+        columns:
+          - name: orders_id
+            description: order identifier
+            tests:
+              - unique
+          - name: shipping_fee
+            description: shipping fee per order
+          - name: shipping_fee_1
+            description: shipping fee per order
+          - name: log_cost
+            description: logistics cost
+          - name: ship_cost
+            description: shipping cost per order
+
+        
