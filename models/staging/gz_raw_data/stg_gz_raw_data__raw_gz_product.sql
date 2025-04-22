@@ -5,7 +5,7 @@ with
     renamed as (
 
         select
-            products_id, cast(purchse_price as float64), purchse_price as purchase_price
+            products_id, cast(purchse_price as float64) as purchase_price
 
         from source
 
