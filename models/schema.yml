@@ -16,6 +16,13 @@ sources:
         
       - name: raw_gz_sales
         description: table of order id and associated product id along with revenue generated and quantity of products sold
+        loaded_at_field: CAST(date_date AS TIMESTAMP)
+        freshness: 
+          
+          warn_after:
+            count: 90
+            period: day
+        
         columns:
           - name: date_date
             description: date of purchase
