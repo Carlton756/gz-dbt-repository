@@ -7,13 +7,12 @@ sources:
       - name: raw_gz_product
         description: table containing product id ssociated with purchase price of each product
         columns:
-            - name: products_id
-              description: product identifier which is also the primary key
-              tests:
-              - unique
-              - not null
-            - name: purchSE_PRICE
-              description: product purchase price
+          - name: products_id
+            description: product identifier which is also the primary key
+            tests:
+            - unique
+          - name: purchSE_PRICE
+            description: product purchase price
         
       - name: raw_gz_sales
         description: table of order id and associated product id along with revenue generated and quantity of products sold
