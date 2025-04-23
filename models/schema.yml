@@ -8,9 +8,10 @@ sources:
         description: table containing product id ssociated with purchase price of each product
         columns:
           - name: products_id
-            description: product identifier
+            description: product identifier which is also the primary key
             tests:
               - unique
+              - not null
           - name: purchSE_PRICE
             description: product purchase price
         
@@ -34,11 +35,14 @@ sources:
             description: revenue generated from each order made of a product
           - name: quantity
             description: number of products sold
+        tests:
+          - unique:
+              column name: "(orders_id || '-' || pdt_id)"
       - name: raw_gz_ship
         description: table containing order id and associated shipping fees, logistics cost, shipping costs for each order
         columns:
           - name: orders_id
-            description: order identifier
+            description: order identifier which is also the primary key
             tests:
               - unique
               - not_null
