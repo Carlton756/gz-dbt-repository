@@ -1,0 +1,128 @@
+version: 2
+
+sources:
+  - name: gz_raw_data
+    description: dataset containing raw data sources
+    tables:
+      - name: raw_gz_product
+        description: table containing product id ssociated with purchase price of each product
+        columns:
+          - name: products_id
+            description: product identifier which is also the primary key
+            tests:
+              - unique
+              - not_null
+
+          - name: purchSE_PRICE
+            description: product purchase price
+
+      - name: raw_gz_sales
+        description: table of order id and associated product id along with revenue generated and quantity of products sold
+        loaded_at_field: CAST(date_date AS TIMESTAMP)
+        freshness:
+          warn_after:
+            count: 90
+            period: day
+
+        columns:
+          - name: date_date
+            description: date of purchase
+          - name: orders_id
+            description: order identifier
+          - name: pdt_id
+            description: product identifier
+          - name: revenue
+            description: revenue generated from each order made of a product
+          - name: quantity
+            description: number of products sold
+        tests:
+          - unique:
+              column_name: "(orders_id || '-' || pdt_id)"
+      - name: raw_gz_ship
+        description: table containing order id and associated shipping fees, logistics cost, shipping costs for each order
+        columns:
+          - name: orders_id
+            description: order identifier which is also the primary key
+            tests:
+              - unique
+              - not_null
+          - name: shipping_fee
+            description: shipping fee per order
+          - name: shipping_fee_1
+            description: shipping fee per order
+          - name: log_cost
+            description: logistics cost
+          - name: ship_cost
+            description: shipping cost per order
+
+models:
+  - name: int_orders_margin
+    description: a calculation of margin per product
+    columns:
+      - name: orders_id
+        description: identification of each order
+        tests:
+          - unique
+          - not_null
+      - name: date_date
+        description: date order was made
+      - name: revenue
+        description: revenue made per order
+      - name: quantity
+        description: number or products ordered per order
+      - name: purchase_cost
+        description: cost per order
+      - name: margin
+        description: difference between revenue and purchase cost
+
+  - name: int_sales_margin
+    description: calculating sales margin per product combined with order
+    columns:
+      - name: products_id
+        description: identification of each product sold
+        tests:
+          - not_null
+      - name: orders_id
+        description: identification of each order for a specific product id
+        tests:
+          - not_null
+      - name: date_date
+        description: date product was sold
+      - name: revenue
+        description: revenue made per product sold
+      - name: quantity
+        description: number or products sold
+      - name: purchase_cost
+        description: cost per product
+      - name: margin
+        description: difference between revenue and purchase cost per product
+    tests:
+      - unique:
+          column_name: "(orders_id || '-' || products_id)"
+
+  - name: int_orders_operational
+    description: calculating operational margin which is the sum of margin and shipping fee - logistic cost - shipping cost
+    columns:
+      - name: orders_id
+        description: identification of each order made
+        tests:
+          - unique
+          - not_null
+      - name: date_date
+        description: date order was made
+      - name: shipping_fee
+        description: shipping fee per order made
+      - name: logcost
+        description: logistics cost per order made
+      - name: ship_cost
+        description: companies shipping cost per order made
+      - name: revenue
+        description: revenue made per order
+      - name: quantity
+        description: number or products ordered per order
+      - name: purchase_cost
+        description: cost per order
+      - name: margin
+        description: difference between revenue and purchase cost
+    
+      
