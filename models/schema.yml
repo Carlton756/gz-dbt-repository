@@ -11,7 +11,8 @@ sources:
             description: product identifier which is also the primary key
             tests:
               - unique
-  
+              - not_null
+
           - name: purchSE_PRICE
             description: product purchase price
 
@@ -53,3 +54,75 @@ sources:
             description: logistics cost
           - name: ship_cost
             description: shipping cost per order
+
+models:
+  - name: int_orders_margin
+    description: a calculation of margin per product
+    columns:
+      - name: orders_id
+        description: identification of each order
+        tests:
+          - unique
+          - not_null
+      - name: date_date
+        description: date order was made
+      - name: revenue
+        description: revenue made per order
+      - name: quantity
+        description: number or products ordered per order
+      - name: purchase_cost
+        description: cost per order
+      - name: margin
+        description: difference between revenue and purchase cost
+
+  - name: int_sales_margin
+    description: calculating sales margin per product combined with order
+    columns:
+      - name: products_id
+        description: identification of each product sold
+        tests:
+          - not_null
+      - name: orders_id
+        description: identification of each order for a specific product id
+        tests:
+          - not_null
+      - name: date_date
+        description: date product was sold
+      - name: revenue
+        description: revenue made per product sold
+      - name: quantity
+        description: number or products sold
+      - name: purchase_cost
+        description: cost per product
+      - name: margin
+        description: difference between revenue and purchase cost per product
+    tests:
+      - unique:
+          column_name: "(orders_id || '-' || products_id)"
+
+  - name: int_orders_operational
+    description: calculating operational margin which is the sum of margin and shipping fee - logistic cost - shipping cost
+    columns:
+      - name: orders_id
+        description: identification of each order made
+        tests:
+          - unique
+          - not_null
+      - name: date_date
+        description: date order was made
+      - name: shipping_fee
+        description: shipping fee per order made
+      - name: logcost
+        description: logistics cost per order made
+      - name: ship_cost
+        description: companies shipping cost per order made
+      - name: revenue
+        description: revenue made per order
+      - name: quantity
+        description: number or products ordered per order
+      - name: purchase_cost
+        description: cost per order
+      - name: margin
+        description: difference between revenue and purchase cost
+    
+      
