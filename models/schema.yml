@@ -36,7 +36,7 @@ sources:
             description: number of products sold
         tests:
           - unique:
-              column name: "(orders_id || '-' || pdt_id)"
+            column name: "(orders_id || '-' || pdt_id)"
       - name: raw_gz_ship
         description: table containing order id and associated shipping fees, logistics cost, shipping costs for each order
         columns:
