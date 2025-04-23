@@ -10,8 +10,8 @@ sources:
           - name: products_id
             description: product identifier which is also the primary key
             tests:
-            - unique
-            - not null
+              - unique
+              - not null
           - name: purchSE_PRICE
             description: product purchase price
         
