@@ -124,5 +124,22 @@ models:
         description: cost per order
       - name: margin
         description: difference between revenue and purchase cost
-    
-      
+
+  - name: gz_raw_data
+    description: dataset containing raw data sources
+    tables:
+      - name: adwords
+        identifier: raw_gz_adwords
+        description: adwords advertising campaign
+
+      - name: bing
+        identifier: raw_gz_bing
+        description: bing advertising campaign
+
+      - name: criteo
+        identifier: raw_gz_criteo
+        description: criteo advertising campaign
+
+      - name: facebook
+        identifier: raw_gz_facebook
+        description: facebook advertising campaign
