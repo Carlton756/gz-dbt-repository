@@ -6,6 +6,7 @@ SELECT
         ship_cost,
         revenue,
         quantity,
+        purchase_cost,
         margin,
         ROUND((margin + shipping_fee - (logcost + ship_cost)), 2) AS operational_margin
 FROM 
