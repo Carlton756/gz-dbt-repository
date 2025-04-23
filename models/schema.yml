@@ -1,7 +1,8 @@
 version: 2
 
 sources:
-  - name: gz_raw_data
+  - name: raw
+    schema: gz_raw_data
     description: dataset containing raw data sources
     tables:
       - name: raw_gz_product
@@ -12,7 +13,6 @@ sources:
             tests:
               - unique
               - not_null
-
           - name: purchSE_PRICE
             description: product purchase price
 
@@ -54,6 +54,27 @@ sources:
             description: logistics cost
           - name: ship_cost
             description: shipping cost per order
+
+      - name: adwords
+        identifier: raw_gz_adwords
+        description: adwords advertising campaign
+        columns:  
+          - name: date_date
+            description:  date of campaign
+          - name: paid_source
+            description: paid source of the advertising campaign
+          
+      - name: bing
+        identifier: raw_gz_bing
+        description: bing advertising campaign
+
+      - name: criteo
+        identifier: raw_gz_criteo
+        description: criteo advertising campaign
+
+      - name: facebook
+        identifier: raw_gz_facebook
+        description: facebook advertising campaign
 
 models:
   - name: int_orders_margin
@@ -125,21 +146,5 @@ models:
       - name: margin
         description: difference between revenue and purchase cost
 
-  - name: gz_raw_data
-    description: dataset containing raw data sources
-    tables:
-      - name: adwords
-        identifier: raw_gz_adwords
-        description: adwords advertising campaign
 
-      - name: bing
-        identifier: raw_gz_bing
-        description: bing advertising campaign
-
-      - name: criteo
-        identifier: raw_gz_criteo
-        description: criteo advertising campaign
-
-      - name: facebook
-        identifier: raw_gz_facebook
-        description: facebook advertising campaign
+  
