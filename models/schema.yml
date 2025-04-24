@@ -37,7 +37,7 @@ sources:
         tests:
           - unique:
               column_name: "(orders_id || '-' || pdt_id)"
-          - not_null
+
       - name: raw_gz_ship
         description: table containing order id and associated shipping fees, logistics cost, shipping costs for each order
         columns:
@@ -58,23 +58,97 @@ sources:
       - name: adwords
         identifier: raw_gz_adwords
         description: adwords advertising campaign
-        columns:  
+        columns:
           - name: date_date
-            description:  date of campaign
+            description: date of campaign
           - name: paid_source
             description: paid source of the advertising campaign
-          
+            tests:
+              - not_null
+          - name: campaign_key
+            description: key that is specific to the campaign
+          - name: campaign_name
+            description: name of the specific advertising campaign
+            tests:
+              - not_null
+          - name: ads_cost
+            description: cost per ad campaign
+          - name: impression
+            description: number of times an advert appears
+          - name: click
+            description: number of clicks per advert
+        tests:
+          - unique:
+              column_name: "(campaign_name || '-' || date_date)"
+
       - name: bing
         identifier: raw_gz_bing
         description: bing advertising campaign
+        columns:
+          - name: date_date
+            description: date of campaign
+          - name: paid_source
+            description: paid source of the advertising campaign
+          - name: campaign_key
+            description: key that is specific to the campaign
+          - name: campaign_name
+            description: name of the specific advertising campaign
+          - name: ads_cost
+            description: cost per ad campaign
+          - name: impression
+            description: number of times an advert appears
+          - name: click
+            description: number of clicks per advert
+        tests:
+          - unique:
+              column_name: "(campaign_name || '-' || date_date)"
+
 
       - name: criteo
         identifier: raw_gz_criteo
         description: criteo advertising campaign
+        columns:
+          - name: date_date
+            description: date of campaign
+          - name: paid_source
+            description: paid source of the advertising campaign
+          - name: campaign_key
+            description: key that is specific to the campaign
+          - name: campaign_name
+            description: name of the specific advertising campaign
+          - name: ads_cost
+            description: cost per ad campaign
+          - name: impression
+            description: number of times an advert appears
+          - name: click
+            description: number of clicks per advert
+        tests:
+          - unique:
+              column_name: "(campaign_name || '-' || date_date)"
+
 
       - name: facebook
         identifier: raw_gz_facebook
         description: facebook advertising campaign
+        columns:
+          - name: date_date
+            description: date of campaign
+          - name: paid_source
+            description: paid source of the advertising campaign
+          - name: campaign_key
+            description: key that is specific to the campaign
+          - name: campaign_name
+            description: name of the specific advertising campaign
+          - name: ads_cost
+            description: cost per ad campaign
+          - name: impression
+            description: number of times an advert appears
+          - name: click
+            description: number of clicks per advert
+        tests:
+          - unique:
+              column_name: "(campaign_name || '-' || date_date)"
+
 
 models:
   - name: int_orders_margin
@@ -145,6 +219,6 @@ models:
         description: cost per order
       - name: margin
         description: difference between revenue and purchase cost
-
-
   
+  - name: int_campaigns
+    description:  union_all of all 4 ad campaigns
