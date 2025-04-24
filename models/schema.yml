@@ -37,6 +37,7 @@ sources:
         tests:
           - unique:
               column_name: "(orders_id || '-' || pdt_id)"
+          - not_null
       - name: raw_gz_ship
         description: table containing order id and associated shipping fees, logistics cost, shipping costs for each order
         columns:
