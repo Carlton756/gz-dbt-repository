@@ -219,6 +219,10 @@ models:
         description: cost per order
       - name: margin
         description: difference between revenue and purchase cost
-  
+
+  - name: finance_days
+    description: aggregation of orders_operational figures gouped daily
   - name: int_campaigns
     description:  union_all of all 4 ad campaigns
+  - name:  int_campaigns_day
+    description:  joining of int_campaigns_day and finance_days tables

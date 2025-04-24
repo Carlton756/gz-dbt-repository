@@ -1,19 +1,16 @@
-SELECT
-  date_date,
-  COUNT(orders_id) AS nd_transactions,
-  ROUND(SUM(revenue), 2) AS revenue,
-  ROUND(AVG(revenue), 2) AS average_basket,
-  ROUND(SUM(margin), 2) AS margin,
-  ROUND(SUM(operational_margin), 2) AS operational_margin,
-  ROUND(SUM(purchase_cost), 2) AS purchase_cost,
-  ROUND(SUM(shipping_fee), 2) AS shiping_fee,
-  ROUND(SUM(logcost), 2) AS logcost,
-  ROUND(SUM(quantity), 2) AS quantity
-FROM
-    {{ref("int_orders_operational")}}
- 
-GROUP BY
-  date_date
-ORDER BY
-  date_date DESC
+select
+    date_date,
+    count(orders_id) as nd_transactions,
+    round(sum(revenue), 2) as revenue,
+    round(avg(revenue), 2) as average_basket,
+    round(sum(margin), 2) as margin,
+    round(sum(operational_margin), 2) as operational_margin,
+    round(sum(purchase_cost), 2) as purchase_cost,
+    round(sum(shipping_fee), 2) as shiping_fee,
+    round(sum(logcost), 2) as logcost,
+    round(sum(quantity), 2) as quantity,
+    round(sum(ship_cost), 2) as ship_cost
+from {{ ref("int_orders_operational") }}
 
+group by date_date
+order by date_date desc
